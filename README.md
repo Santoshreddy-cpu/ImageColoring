@@ -1,40 +1,87 @@
 # ImageColorizer
-Transform black and white images into beautifully colored images using Deep Learning.
 
-![result.jpg](images/result.png)
+ImageColorizer is a tool for automatically colorizing black and white images using deep learning. This project uses a pre-trained model to add natural colors to grayscale photos, making them look more vivid and realistic.
 
-- Used pretrained model from [Zhang's Github](https://github.com/richzhang/colorization)  
-- Original paper: [Colorful Image Colorization](https://arxiv.org/pdf/1603.08511.pdf)
+## Features
 
-The model used in this project is proposed by Zhang et al.’s 2016 ECCV paper, [Colorful Image Colorization](https://arxiv.org/pdf/1603.08511.pdf) where Zhang et al. decided to attack the problem of image colorization by using Convolutional Neural Networks to “hallucinate” what an input grayscale image would look like when colorized. All images are converted from the RGB color space to the Lab color space. Similar to the RGB color space, the Lab color space has three channels. But unlike the RGB color space, Lab encodes color information differently:
+- **Automatic colorization** of black and white images
+- Utilizes state-of-the-art deep learning models
+- Easy-to-use command line interface
+- Supports common image formats (JPEG, PNG, etc.)
 
-- The L channel encodes lightness intensity only
-- The a channel encodes green-red.
-- The b channel encodes blue-yellow
+## Installation
 
-Since the L channel encodes only the intensity, we can use the L channel as our grayscale input to the network.
+1. **Clone the repository**
 
-From there the network must learn to predict the a and b channels. Given the input L channel and the predicted ab channels we can then form our final output image.
-  
+    ```bash
+    git clone https://github.com/ayanbag/ImageColorizer.git
+    cd ImageColorizer
+    ```
 
-# Requirement
-- Python
-- OpenCV 3.4.2+
-- Numpy
-  
+2. **Create and activate a virtual environment** (recommended)
 
-# Usage
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
 
-- Clone this Repository
+3. **Install the required dependencies**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Usage
+
+To colorize a black-and-white image:
+
+```bash
+python colorize.py --input path/to/your/image.jpg --output path/to/save/colorized.jpg
 ```
-git clone https://github.com/ayanbag/ImageColorizer.git
-cd ImageColorizer
+
+**Parameters:**
+- `--input`: Path to the input grayscale image.
+- `--output`: Path where the colorized image will be saved.
+
+Example:
+
+```bash
+python colorize.py --input images/grayscale_photo.jpg --output results/colorized_photo.jpg
 ```
 
-- **[Important]** Download the model from the following [link](https://drive.google.com/drive/folders/1hNvYYq9i7XYMhv9AtH9bFXRpxP8YcGo_?usp=sharing) and place it in the `model` folder
+## Demo
 
-- Now excute the following command -
+You can try the tool using the sample images provided in the `images` directory:
+
+```bash
+python colorize.py --input images/example_bw.jpg --output results/example_color.jpg
 ```
-python imagecolorizer.py --image <path_to_image>
+
+## Requirements
+
+- Python 3.6+
+- See `requirements.txt` for the full list of dependencies.
+
+## Project Structure
+
 ```
-This script requires one arguments be passed to the script directly from the terminal, i.e. **--image** or **-i** which is the path to our input black/white image. All the colorized image will be saved in `output` folder
+ImageColorizer/
+├── colorize.py
+├── requirements.txt
+├── README.md
+├── images/
+└── results/
+```
+
+## Contribution
+
+Contributions are welcome! Please open issues or submit pull requests for improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## Acknowledgements
+
+- Pre-trained model and research inspiration from [Zhang et al., 2016](https://arxiv.org/abs/1603.08511)
+- Thanks to the open-source community for supporting this project.
